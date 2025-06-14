@@ -1,0 +1,38 @@
+{
+  "name": "windows-maintenance-tool-gui",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "dev-debug": "electron . --dev --devtools",
+    "dev-admin": "powershell -Command \"Start-Process cmd -ArgumentList '/k cd /d \"%cd%\" && npm run dev' -Verb RunAs\"",
+    "dev-admin-debug": "powershell -Command \"Start-Process cmd -ArgumentList '/k cd /d \"%cd%\" && npm run dev-debug' -Verb RunAs\"",
+    "build": "electron-builder",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MedCy1/Windows-Maintenance-Tool-GUI.git"
+  },
+  "keywords": [
+    "windows",
+    "maintenance",
+    "electron",
+    "gui"
+  ],
+  "author": "MedCy1",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MedCy1/Windows-Maintenance-Tool-GUI/issues"
+  },
+  "homepage": "https://github.com/MedCy1/Windows-Maintenance-Tool-GUI#readme",
+  "description": "Windows Maintenance Tool with modern GUI - V2.9.8",
+  "devDependencies": {
+    "electron": "^36.4.0",
+    "electron-builder": "^26.0.12"
+  },
+  "dependencies": {
+    "@electron/remote": "^2.1.2"
+  }
+}
