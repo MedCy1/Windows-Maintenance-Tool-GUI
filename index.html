@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows Maintenance Tool V2.9.8</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Particules d'arrière-plan -->
+    <div id="particles-container"></div>
+    
+    <!-- Barre de titre personnalisée -->
+    <div class="title-bar">
+        <div class="title-bar-left">
+            <div class="app-icon">🛠️</div>
+            <span class="app-title">Windows Maintenance Tool GUI V0.0.1 - By MedCy1</span>
+        </div>
+        <div class="title-bar-right">
+            <button class="title-btn minimize-btn" id="minimizeBtn">-</button>
+            <button class="title-btn maximize-btn" id="maximizeBtn">□</button>
+            <button class="title-btn close-btn" id="closeBtn">x</button>
+        </div>
+    </div>
+
+    <!-- Contenu principal -->
+    <div class="main-container">
+        <!-- Sidebar avec navigation -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>🔧 Outils de maintenance</h2>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3>🔄 Mises à jour</h3>
+                <button class="sidebar-btn" data-category="updates">
+                    Windows Apps (Winget)
+                </button>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>🏥 Santé système</h3>
+                <button class="sidebar-btn" data-category="health">
+                    Scan & Réparation
+                </button>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>🌐 Réseau</h3>
+                <button class="sidebar-btn" data-category="network">
+                    Outils réseau
+                </button>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>🧹 Nettoyage</h3>
+                <button class="sidebar-btn" data-category="cleanup">
+                    Optimisation
+                </button>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>⚙️ Utilitaires</h3>
+                <button class="sidebar-btn" data-category="utilities">
+                    Outils avancés
+                </button>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>💬 Support</h3>
+                <button class="sidebar-btn" data-category="support">
+                    Aide & Contact
+                </button>
+            </div>
+        </div>
+
+        <!-- Zone principale -->
+        <div class="content-area">
+            <!-- Grille des outils -->
+            <div class="tools-grid" id="toolsGrid">
+                
+                <!-- Section Mises à jour -->
+                <div class="tool-category" id="updates-category">
+                    <div class="category-header">
+                        <h2>🔄 Mises à jour Windows</h2>
+                        <p>Maintenir vos applications à jour</p>
+                    </div>
+                    
+                    <div class="tools-container">
+                        <div class="tool-card" data-command="winget-update">
+                            <div class="tool-icon">📦</div>
+                            <div class="tool-info">
+                                <h3>Mettre à jour les applications</h3>
+                                <p>Winget upgrade --all</p>
+                            </div>
+                            <button class="execute-btn">Exécuter</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section Santé système -->
+                <div class="tool-category" id="health-category">
+                    <div class="category-header">
+                        <h2>🏥 Santé du système</h2>
+                        <p>Diagnostiquer et réparer Windows</p>
+                    </div>
+                    
+                    <div class="tools-container">
+                        <div class="tool-card" data-command="sfc-scan">
+                            <div class="tool-icon">🔍</div>
+                            <div class="tool-info">
+                                <h3>Scanner les fichiers corrompus</h3>
+                                <p>SFC /scannow</p>
+                            </div>
+                            <button class="execute-btn">Exécuter</button>
+                        </div>
+                        
+                        <div class="tool-card" data-command="dism-check">
+                            <div class="tool-icon">🩺</div>
+                            <div class="tool-info">
+                                <h3>Vérifier la santé Windows</h3>
+                                <p>DISM CheckHealth</p>
+                            </div>
+                            <button class="execute-btn">Exécuter</button>
+                        </div>
+                        
+                        <div class="tool-card" data-command="dism-restore">
+                            <div class="tool-icon">🛠️</div>
+                            <div class="tool-info">
+                                <h3>Réparer la santé Windows</h3>
+                                <p>DISM RestoreHealth</p>
+                            </div>
+                            <button class="execute-btn">Exécuter</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section Réseau -->
+                <div class="tool-category" id="network-category">
+                    <div class="category-header">
+                        <h2>🌐 Outils réseau</h2>
+                        <p>Diagnostiquer et réparer la connectivité</p>
+                    </div>
+                    
+                    <div class="tools-container">
+                        <div class="tool-card" data-command="dns-flush">
+                            <div class="tool-icon">🔄</div>
+                            <div class="tool-info">
+                                <h3>Vider le cache DNS</h3>
+                                <p>ipconfig /flushdns</p>
+                            </div>
+                            <button class="execute-btn">Exécuter</button>
+                        </div>
+                        
+                        <div class="tool-card" data-command="dns-google">
+                            <div class="tool-icon">🔵</div>
+                            <div class="tool-info">
+                                <h3>DNS Google (8.8.8.8)</h3>
+                                <p>Configuration DNS rapide</p>
+                            </div>
+                            <button class="execute-btn">Exécuter</button>
+                        </div>
+                        
+                        <div class="tool-card" data-command="dns-cloudflare">
+                            <div class="tool-icon">🟠</div>
+                            <div class="tool-info">
+                                <h3>DNS Cloudflare (1.1.1.1)</h3>
+                                <p>Configuration DNS sécurisé</p>
+                            </div>
+                            <button class="execute-btn">Exécuter</button>
+                        </div>
+                        
+                        <div class="tool-card" data-command="network-info">
+                            <div class="tool-icon">📊</div>
+                            <div class="tool-info">
+                                <h3>Informations réseau</h3>
+                                <p>ipconfig /all</p>
+                            </div>
+                            <button class="execute-btn">Exécuter</button>
+                        </div>
+                        
+                        <div class="tool-card" data-command="restart-adapters">
+                            <div class="tool-icon">🔄</div>
+                            <div class="tool-info">
+                                <h3>Redémarrer adaptateurs</h3>
+                                <p>Reset interfaces réseau</p>
+                            </div>
+                            <button class="execute-btn">Exécuter</button>
+                        </div>
+                        
+                        <div class="tool-card" data-command="network-repair">
+                            <div class="tool-icon">🛠️</div>
+                            <div class="tool-info">
+                                <h3>Réparation automatique</h3>
+                                <p>Réinitialiser tous les composants</p>
+                            </div>
+                            <button class="execute-btn">Exécuter</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section Nettoyage -->
+                <div class="tool-category" id="cleanup-category">
+                    <div class="category-header">
+                        <h2>🧹 Nettoyage & Optimisation</h2>
+                        <p>Libérer de l'espace et optimiser les performances</p>
+                    </div>
+                    
+                    <div class="tools-container">
+                        <div class="tool-card" data-command="disk-cleanup">
+                            <div class="tool-icon">💽</div>
+                            <div class="tool-info">
+                                <h3>Nettoyage de disque</h3>
+                                <p>cleanmgr</p>
+                            </div>
+                            <button class="execute-btn">Exécuter</button>
+                        </div>
+                        
+                        <div class="tool-card" data-command="chkdsk">
+                            <div class="tool-icon">🔍</div>
+                            <div class="tool-info">
+                                <h3>Scan d'erreurs avancé</h3>
+                                <p>CHKDSK tous les disques</p>
+                            </div>
+                            <button class="execute-btn">Exécuter</button>
+                        </div>
+                        
+                        <div class="tool-card" data-command="temp-cleanup">
+                            <div class="tool-icon">🗑️</div>
+                            <div class="tool-info">
+                                <h3>Fichiers temporaires</h3>
+                                <p>Suppression sécurisée</p>
+                            </div>
+                            <button class="execute-btn">Exécuter</button>
+                        </div>
+                        
+                        <div class="tool-card" data-command="registry-cleanup">
+                            <div class="tool-icon">📝</div>
+                            <div class="tool-info">
+                                <h3>Nettoyage registre</h3>
+                                <p>Optimisation avancée</p>
+                            </div>
+                            <button class="execute-btn">Exécuter</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section Utilitaires -->
+                <div class="tool-category" id="utilities-category">
+                    <div class="category-header">
+                        <h2>⚙️ Utilitaires & Extras</h2>
+                        <p>Outils avancés et rapports système</p>
+                    </div>
+                    
+                    <div class="tools-container">
+                        <div class="tool-card" data-command="show-drivers">
+                            <div class="tool-icon">🖥️</div>
+                            <div class="tool-info">
+                                <h3>Liste des pilotes</h3>
+                                <p>Export vers le Bureau</p>
+                            </div>
+                            <button class="execute-btn">Exécuter</button>
+                        </div>
+                        
+                        <div class="tool-card" data-command="windows-update-repair">
+                            <div class="tool-icon">🔧</div>
+                            <div class="tool-info">
+                                <h3>Réparation Windows Update</h3>
+                                <p>Reset composants Update</p>
+                            </div>
+                            <button class="execute-btn">Exécuter</button>
+                        </div>
+                        
+                        <div class="tool-card" data-command="system-report">
+                            <div class="tool-icon">📊</div>
+                            <div class="tool-info">
+                                <h3>Rapport système complet</h3>
+                                <p>Export détaillé</p>
+                            </div>
+                            <button class="execute-btn">Exécuter</button>
+                        </div>
+                        
+                        <div class="tool-card" data-command="update-service-reset">
+                            <div class="tool-icon">🔄</div>
+                            <div class="tool-info">
+                                <h3>Reset services Update</h3>
+                                <p>Redémarrage des services</p>
+                            </div>
+                            <button class="execute-btn">Exécuter</button>
+                        </div>
+                        
+                        <div class="tool-card" data-command="routing-table">
+                            <div class="tool-icon">🗺️</div>
+                            <div class="tool-info">
+                                <h3>Table de routage</h3>
+                                <p>Export réseau avancé</p>
+                            </div>
+                            <button class="execute-btn">Exécuter</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section Support -->
+                <div class="tool-category" id="support-category">
+                    <div class="category-header">
+                        <h2>💬 Contact et Support</h2>
+                        <p>Aide et informations de contact</p>
+                    </div>
+                    
+                    <div class="tools-container">
+                        <div class="support-card">
+                            <div class="support-icon">💬</div>
+                            <div class="support-info">
+                                <h3>Besoin d'aide ?</h3>
+                                <p>N'hésitez pas à me contacter pour toute question !</p>
+                                <div class="contact-info">
+                                    <div class="contact-item">
+                                        <strong>Discord:</strong> MedCy1
+                                    </div>
+                                    <div class="contact-item">
+                                        <strong>Serveur de support:</strong> 
+                                        <a href="https://discord.gg/bCQqKHGxja" class="discord-link">discord.gg/x</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Zone de sortie/logs -->
+    <div class="output-panel" id="outputPanel">
+        <div class="output-header">
+            <div class="output-title">
+                <span class="output-icon">📝</span>
+                <span>Sortie des commandes</span>
+            </div>
+            <div class="output-controls">
+                <button class="output-btn clear-btn" id="clearOutput">Effacer</button>
+                <button class="output-btn toggle-btn" id="toggleOutput">▼</button>
+            </div>
+        </div>
+        <div class="output-content" id="outputContent">
+            <div class="output-line welcome">
+                🛠️ Windows Maintenance Tool V2.9.8 - Interface initialisée
+            </div>
+            <div class="output-line info">
+                ✅ Privilèges administrateur requis pour certaines opérations
+            </div>
+            <div class="output-line info">
+                📋 Sélectionnez un outil pour commencer...
+            </div>
+        </div>
+    </div>
+
+    <!-- Barre de statut -->
+    <div class="status-bar">
+        <div class="status-left">
+            <span class="status-indicator" id="statusIndicator">●</span>
+            <span class="status-text" id="statusText">Prêt</span>
+        </div>
+        <div class="status-center">
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+        <div class="status-right">
+            <span class="system-info" id="systemInfo">Windows</span>
+        </div>
+    </div>
+
+    <!-- Modal de confirmation -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">Confirmation</h3>
+                <button class="modal-close" id="modalClose">×</button>
+            </div>
+            <div class="modal-content" id="modalContent">
+                Êtes-vous sûr de vouloir exécuter cette commande ?
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn cancel-btn" id="modalCancel">Annuler</button>
+                <button class="modal-btn confirm-btn" id="modalConfirm">Confirmer</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>
