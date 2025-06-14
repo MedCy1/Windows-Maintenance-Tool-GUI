@@ -8,77 +8,79 @@
 ![Electron](https://img.shields.io/badge/Electron-36.4.0-9feaf9.svg)
 ![Build Status](https://github.com/MedCy1/Windows-Maintenance-Tool-GUI/workflows/Build%20and%20Release/badge.svg)
 
-**Une interface graphique moderne pour les outils de maintenance Windows**
+**A modern graphical interface for Windows maintenance tools**
 
-[📥 Télécharger](https://github.com/MedCy1/Windows-Maintenance-Tool-GUI/releases/latest) •
-[🐛 Signaler un bug](https://github.com/MedCy1/Windows-Maintenance-Tool-GUI/issues) •
-[💡 Demander une fonctionnalité](https://github.com/MedCy1/Windows-Maintenance-Tool-GUI/issues)
+[📥 Download](https://github.com/MedCy1/Windows-Maintenance-Tool-GUI/releases/latest) •
+[🐛 Report a bug](https://github.com/MedCy1/Windows-Maintenance-Tool-GUI/issues) •
+[💡 Request a feature](https://github.com/MedCy1/Windows-Maintenance-Tool-GUI/issues)
+
+[French README](docs/lang/README.FR.md)
 
 </div>
 
 ---
 
-## 📋 Table des matières
+## 📋 Table of Contents
 
-- [🎯 À propos](#-à-propos)
-- [✨ Fonctionnalités](#-fonctionnalités)
+- [🎯 About](#-about)
+- [✨ Features](#-features)
 - [📸 Screenshots](#-screenshots)
-- [⚡ Installation rapide](#-installation-rapide)
-- [🚀 Utilisation](#-utilisation)
-- [🔧 Développement](#-développement)
+- [⚡ Quick Installation](#-quick-installation)
+- [🚀 Usage](#-usage)
+- [🔧 Development](#-development)
 - [📦 Build](#-build)
-- [🤝 Contribution](#-contribution)
-- [📄 Licence](#-licence)
-- [⚠️ Avertissement](#️-avertissement)
+- [🤝 Contributing](#-contributing)
+- [📄 License](#-license)
+- [⚠️ Disclaimer](#️-Disclaimer)
 
 ---
 
-## 🎯 À propos
+## 🎯 About
 
-**Windows Maintenance Tool GUI** est une application Electron moderne qui fournit une interface graphique intuitive pour les outils de maintenance Windows les plus couramment utilisés. Fini les lignes de commande complexes - maintenez votre système Windows en quelques clics !
+**Windows Maintenance Tool GUI** is a modern Electron application that provides an intuitive graphical interface for the most commonly used Windows maintenance tools. No more complex command lines—maintain your Windows system in just a few clicks!
 
-### 🎨 Pourquoi cette application ?
+### 🎨 Why this application?
 
-- **Interface moderne** : Design glassmorphism avec animations fluides
-- **Facilité d'utilisation** : Plus besoin de mémoriser les commandes CMD
-- **Sécurité** : Demande d'élévation des privilèges seulement quand nécessaire
-- **Transparence** : Affichage en temps réel des sorties des commandes
-- **Organisation** : Outils classés par catégories logiques
+- **Modern interface**: Glassmorphism design with smooth animations
+- **Ease of use**: No need to memorize CMD commands
+- **Security**: Requests privilege elevation only when necessary
+- **Transparency**: Real-time display of command outputs
+- **Organization**: Tools grouped by logical categories
 
 ---
 
-## ✨ Fonctionnalités
+## ✨ Features
 
-### 🏥 Santé système
-- **SFC Scan** (`sfc /scannow`) - Vérification des fichiers système corrompus
-- **DISM Health Check** - Vérification de l'intégrité de l'image Windows
-- **DISM Cleanup** - Nettoyage des composants Windows
-- **Réparation de l'image système** - Restauration automatique
+### 🏥 System Health
+- **SFC Scan** - Checks for corrupted system files
+- **DISM Health Check** - Checks Windows image integrity
+- **DISM Cleanup** - Cleans up Windows components
+- **System Image Repair** - Automatic restoration
 
-### 🧹 Nettoyage
-- **Nettoyage disque** - Suppression des fichiers temporaires
-- **Nettoyage DNS** - Vidage du cache DNS
-- **Nettoyage navigateurs** - Suppression des données de navigation
-- **Nettoyage registre** - Optimisation du registre Windows
+### 🧹 Cleaning
+- **Disk Cleanup** - Removes temporary files
+- **DNS Cleanup** - Flushes DNS cache
+- **Browser Cleanup** - Deletes browsing data
+- **Registry Cleanup** - Optimizes Windows registry
 
-### 🔄 Optimisation
-- **Défragmentation** - Optimisation des disques durs
-- **Nettoyage de démarrage** - Gestion des programmes au démarrage
-- **Optimisation mémoire** - Libération de la RAM
-- **Services Windows** - Gestion des services système
+### 🔄 Optimization
+- **Defragmentation** - Optimizes hard drives
+- **Startup Cleanup** - Manages startup programs
+- **Memory Optimization** - Frees up RAM
+- **Windows Services** - Manages system services
 
-### 🔒 Sécurité
-- **Windows Defender** - Scan antivirus complet
-- **Windows Update** - Vérification et installation des mises à jour
-- **Pare-feu Windows** - Configuration et vérification
-- **Sauvegardes système** - Création de points de restauration
+### 🔒 Security
+- **Windows Defender** - Full antivirus scan
+- **Windows Update** - Checks and installs updates
+- **Windows Firewall** - Configuration and verification
+- **System Backups** - Creates restore points
 
-### 🛠️ Fonctionnalités avancées
-- **Privilèges automatiques** - Élévation seulement quand nécessaire
-- **Sortie en temps réel** - Affichage live des commandes
-- **Logs détaillés** - Historique de toutes les opérations
-- **Interface responsive** - S'adapte à toutes les tailles d'écran
-- **Raccourcis clavier** - Navigation rapide (F12, Ctrl+L, Ctrl+Shift+C)
+### 🛠️ Advanced Features
+- **Automatic privileges** - Elevation only when needed
+- **Real-time output** - Live command display
+- **Detailed logs** - History of all operations
+- **Responsive interface** - Adapts to all screen sizes
+- **Keyboard shortcuts** - Quick navigation (F12, Ctrl+L, Ctrl+Shift+C)
 
 ---
 
@@ -86,235 +88,235 @@
 
 <div align="center">
 
-### Interface principale
-![Interface principale](docs/screenshots/main-interface.png)
+### Main Interface
+![Main Interface](docs/screenshots/main-interface.png)
 
-### Outils de santé système
-![Santé système](docs/screenshots/health-tools.png)
+### System Health Tools
+![System Health](docs/screenshots/health-tools.png)
 
-### Sortie en temps réel
-![Sortie temps réel](docs/screenshots/real-time-output.png)
+### Real-time Output
+![Real-time Output](docs/screenshots/real-time-output.png)
 
 </div>
 
 ---
 
-## ⚡ Installation rapide
+## ⚡ Quick Installation
 
-### Option 1: Téléchargement direct (Recommandé)
+### Option 1: Direct Download (Recommended)
 
-1. Allez sur la [page des releases](https://github.com/MedCy1/Windows-Maintenance-Tool-GUI/releases/latest)
-2. Téléchargez `windows-maintenance-tool-gui Setup x.x.x.exe`
-3. Exécutez l'installateur et suivez les instructions
-4. Lancez l'application depuis le menu Démarrer
+1. Go to the [releases page](https://github.com/MedCy1/Windows-Maintenance-Tool-GUI/releases/latest)
+2. Download `windows-maintenance-tool-gui Setup x.x.x.exe`
+3. Run the installer and follow the instructions
+4. Launch the app from the Start menu
 
-### Option 2: Installation portable
+### Option 2: Portable Installation
 
-1. Téléchargez `windows-maintenance-tool-gui Portable x.x.x.zip`
-2. Extrayez le contenu dans un dossier de votre choix
-3. Exécutez `Windows-Maintenance-Tool.exe`
+1. Download `windows-maintenance-tool-gui Portable x.x.x.zip`
+2. Extract the contents to a folder of your choice
+3. Run `Windows-Maintenance-Tool.exe`
 
-### Configuration système requise
+### System Requirements
 
-- **OS** : Windows 10/11 (64-bit)
-- **RAM** : 4 GB minimum, 8 GB recommandé
-- **Espace disque** : 200 MB pour l'installation
-- **Privilèges** : Compte utilisateur standard (élévation automatique si nécessaire)
-
----
-
-## 🚀 Utilisation
-
-### Premier lancement
-
-1. **Lancez l'application** normalement (pas besoin d'être administrateur)
-2. **Sélectionnez une catégorie** dans la barre latérale gauche
-3. **Choisissez un outil** dans la liste centrale
-4. **Cliquez sur "Exécuter"** - L'application demandera les privilèges si nécessaire
-
-### Conseils d'utilisation
-
-- 🔐 **Privilèges** : L'application demande l'élévation seulement pour les outils qui en ont besoin
-- 📊 **Progression** : Surveillez la barre de progression et les logs en temps réel
-- ⌨️ **Raccourcis** : 
-  - `F12` : Ouvrir/fermer les outils de développement
-  - `Ctrl+L` : Effacer les logs
-  - `Ctrl+Shift+C` : Copier les logs dans le presse-papiers
-- 💾 **Logs** : Tous les logs sont automatiquement horodatés et peuvent être copiés
-
-### Exemples d'utilisation
-
-**Problème de fichiers système corrompus :**
-1. Catégorie "Santé système" → "Scanner les fichiers corrompus"
-2. Confirmez l'élévation UAC
-3. Attendez la fin du scan et suivez les recommandations
-
-**Nettoyage rapide du système :**
-1. Catégorie "Nettoyage" → "Nettoyage disque complet"
-2. Sélectionnez les éléments à nettoyer
-3. Confirmez et attendez la fin
+- **OS**: Windows 10/11 (64-bit)
+- **RAM**: 4 GB minimum, 8 GB recommended
+- **Disk space**: 200 MB for installation
+- **Privileges**: Standard user account (automatic elevation if needed)
 
 ---
 
-## 🔧 Développement
+## 🚀 Usage
 
-### Prérequis
+### First Launch
 
-- **Node.js** 18+ ([télécharger](https://nodejs.org/))
-- **npm** ou **yarn**
-- **Git** ([télécharger](https://git-scm.com/))
+1. **Launch the app** normally (no need to be administrator)
+2. **Select a category** in the left sidebar
+3. **Choose a tool** from the central list
+4. **Click "Run"** – The app will request privileges if necessary
 
-### Installation pour le développement
+### Usage Tips
+
+- 🔐 **Privileges**: The app requests elevation only for tools that require it
+- 📊 **Progress**: Monitor the progress bar and real-time logs
+- ⌨️ **Shortcuts**: 
+  - `F12`: Open/close developer tools
+  - `Ctrl+L`: Clear logs
+  - `Ctrl+Shift+C`: Copy logs to clipboard
+- 💾 **Logs**: All logs are automatically timestamped and can be copied
+
+### Usage Examples
+
+**Corrupted system files issue:**
+1. "System Health" category → "Scan for corrupted files"
+2. Confirm UAC elevation
+3. Wait for the scan to finish and follow recommendations
+
+**Quick system cleanup:**
+1. "Cleaning" category → "Full disk cleanup"
+2. Select items to clean
+3. Confirm and wait for completion
+
+---
+
+## 🔧 Development
+
+### Prerequisites
+
+- **Node.js** 18+ ([download](https://nodejs.org/))
+- **npm** or **yarn**
+- **Git** ([download](https://git-scm.com/))
+
+### Development Setup
 
 ```bash
-# Cloner le repository
+# Clone the repository
 git clone https://github.com/MedCy1/Windows-Maintenance-Tool-GUI.git
 cd Windows-Maintenance-Tool-GUI
 
-# Installer les dépendances
+# Install dependencies
 npm install
 
-# Lancer en mode développement
+# Start in development mode
 npm run dev
 
-# Lancer avec les DevTools
+# Start with DevTools
 npm run dev-debug
 
-# Lancer en mode administrateur (pour tester les privilèges)
+# Start as administrator (to test privileges)
 npm run dev-admin
 ```
 
-### Structure du projet
+### Project Structure
 
 ```
 Windows-Maintenance-Tool-GUI/
-├── src/                    # Code source de l'interface
-│   ├── index.html         # Interface principale
-│   ├── css/              # Styles CSS
-│   └── js/               # Scripts JavaScript
-├── main.js               # Processus principal Electron
-├── package.json          # Configuration Node.js
-├── build/                # Configuration de build
-└── docs/                 # Documentation et screenshots
+├── src/                    # UI source code
+│   ├── index.html         # Main interface
+│   ├── css/              # CSS styles
+│   └── js/               # JavaScript scripts
+├── main.js               # Electron main process
+├── package.json          # Node.js configuration
+├── build/                # Build configuration
+└── docs/                 # Documentation and screenshots
 ```
 
-### Scripts de développement
+### Development Scripts
 
 ```bash
-npm run dev              # Mode développement normal
-npm run dev-debug        # Mode développement avec DevTools
-npm run dev-admin        # Mode développement avec privilèges admin
-npm run build            # Build de production
-npm run test             # Tests (à implémenter)
+npm run dev              # Normal development mode
+npm run dev-debug        # Development mode with DevTools
+npm run dev-admin        # Development mode with admin privileges
+npm run build            # Production build
+npm run test             # Tests (to be implemented)
 ```
 
-### Contribution au code
+### Contributing Code
 
-1. **Fork** le projet
-2. **Créez une branche** pour votre fonctionnalité (`git checkout -b feature/awesome-feature`)
-3. **Commitez** vos changements (`git commit -m 'Add awesome feature'`)
-4. **Push** vers la branche (`git push origin feature/awesome-feature`)
-5. **Ouvrez une Pull Request**
+1. **Fork** the project
+2. **Create a branch** for your feature (`git checkout -b feature/awesome-feature`)
+3. **Commit** your changes (`git commit -m 'Add awesome feature'`)
+4. **Push** to your branch (`git push origin feature/awesome-feature`)
+5. **Open a Pull Request**
 
 ---
 
 ## 📦 Build
 
-### Build local
+### Local Build
 
 ```bash
-# Build pour Windows (installateur + portable)
+# Build for Windows (installer + portable)
 npm run build
 
-# Les fichiers de sortie seront dans le dossier dist/
+# Output files will be in the dist/ folder
 ```
 
-### Build automatique (CI/CD)
+### Automatic Build (CI/CD)
 
-Le projet utilise **GitHub Actions** pour automatiser les builds et releases :
+The project uses **GitHub Actions** to automate builds and releases:
 
-- ✅ **Build automatique** à chaque push sur `main`
-- 📦 **Release automatique** à chaque tag `v*`
-- 🏗️ **Artifacts** : Installateur `.exe` et version portable `.zip`
-- 🔄 **Multi-format** : NSIS installer, portable, et ZIP
-
----
-
-## 🤝 Contribution
-
-Les contributions sont les bienvenues ! Voici comment vous pouvez aider :
-
-### 🐛 Signaler des bugs
-
-1. Vérifiez que le bug n'a pas déjà été signalé
-2. Utilisez le [template de bug report](https://github.com/MedCy1/Windows-Maintenance-Tool-GUI/issues/new?template=bug_report.md)
-3. Incluez les logs d'erreur et votre configuration système
-
-### 💡 Proposer des fonctionnalités
-
-1. Vérifiez qu'elle n'a pas déjà été proposée
-2. Utilisez le [template de feature request](https://github.com/MedCy1/Windows-Maintenance-Tool-GUI/issues/new?template=feature_request.md)
-3. Décrivez clairement l'utilité et l'implémentation envisagée
-
-### 🔧 Contribuer au code
-
-- Respectez le style de code existant
-- Ajoutez des commentaires pour les fonctions complexes
-- Testez vos modifications sur différentes versions de Windows
-- Mettez à jour la documentation si nécessaire
-
-### 📝 Améliorer la documentation
-
-- Corriger les fautes de frappe
-- Ajouter des exemples d'utilisation
-- Traduire en d'autres langues
-- Créer des tutoriels vidéo
+- ✅ **Automatic build** on every push to `main`
+- 📦 **Automatic release** on every `v*` tag
+- 🏗️ **Artifacts**: `.exe` installer and portable `.zip` version
+- 🔄 **Multi-format**: NSIS installer, portable, and ZIP
 
 ---
 
-## 📄 Licence
+## 🤝 Contributing
 
-Ce projet est sous licence **GNU Affero General Public License v3.0 (AGPLv3)**.
+Contributions are welcome! Here’s how you can help:
 
-### Vous êtes libre de :
-- ✅ **Utiliser**, **étudier** et **exécuter** le logiciel pour tout usage
-- ✅ **Modifier** le code selon vos besoins
-- ✅ **Distribuer** vos modifications sous la même licence
+### 🐛 Report Bugs
 
-### Mais si vous :
-- 📤 **Distribuez** ce projet ou une version modifiée, ou
-- 🌐 **Fournissez ce service via un réseau** (comme une application web),
+1. Check if the bug has already been reported
+2. Use the [bug report template](https://github.com/MedCy1/Windows-Maintenance-Tool-GUI/issues/new?template=bug_report.md)
+3. Include error logs and your system configuration
 
-### Alors vous devez :
-- 📝 **Rendre le code source complet disponible** sous la même licence
+### 💡 Suggest Features
 
-Cela garantit que les améliorations restent ouvertes et profitent à toute la communauté.
+1. Check if it has already been suggested
+2. Use the [feature request template](https://github.com/MedCy1/Windows-Maintenance-Tool-GUI/issues/new?template=feature_request.md)
+3. Clearly describe the usefulness and intended implementation
 
-🔗 Voir le texte complet de la licence dans le fichier [LICENSE](./LICENSE).
+### 🔧 Contribute Code
+
+- Follow the existing code style
+- Add comments for complex functions
+- Test your changes on different Windows versions
+- Update documentation if needed
+
+### 📝 Improve Documentation
+
+- Fix typos
+- Add usage examples
+- Translate to other languages
+- Create video tutorials
 
 ---
 
-## ⚠️ Avertissement
+## 📄 License
 
-### Utilisation responsable
+This project is licensed under the **GNU Affero General Public License v3.0 (AGPLv3)**.
 
-- 🔒 **Privilèges administrateur** : Cette application peut demander des privilèges élevés pour certaines opérations
-- 💾 **Sauvegarde** : Toujours sauvegarder vos données importantes avant d'utiliser les outils de nettoyage
-- 🧪 **Test** : Testez d'abord sur un système non critique si possible
-- 📋 **Logs** : Consultez toujours les logs pour comprendre les actions effectuées
+### You are free to:
+- ✅ **Use**, **study**, and **run** the software for any purpose
+- ✅ **Modify** the code as needed
+- ✅ **Distribute** your modifications under the same license
 
-### Responsabilité
+### But if you:
+- 📤 **Distribute** this project or a modified version, or
+- 🌐 **Provide this as a network service** (like a web app),
 
-L'auteur ne peut être tenu responsable de tout dommage causé par l'utilisation de cet outil. Utilisez-le à vos propres risques et assurez-vous de comprendre les actions effectuées.
+### Then you must:
+- 📝 **Make the complete source code available** under the same license
+
+This ensures that improvements remain open and benefit the whole community.
+
+🔗 See the full license text in the [LICENSE](./LICENSE) file.
+
+---
+
+## ⚠️ Disclaimer
+
+### Responsible Use
+
+- 🔒 **Administrator privileges**: This app may request elevated privileges for certain operations
+- 💾 **Backup**: Always back up your important data before using cleaning tools
+- 🧪 **Testing**: Test first on a non-critical system if possible
+- 📋 **Logs**: Always check the logs to understand the actions performed
+
+### Liability
+
+The author cannot be held responsible for any damage caused by using this tool. Use it at your own risk and make sure you understand the actions performed.
 
 ---
 
 <div align="center">
 
-**⭐ Si ce projet vous aide, n'hésitez pas à lui donner une étoile !**
+**⭐ If this project helps you, feel free to give it a star!**
 
 Made with ❤️ by [MedCy1](https://github.com/MedCy1)
 
-[🔝 Retour en haut](#️-windows-maintenance-tool-gui)
+[🔝 Back to top](#️-windows-maintenance-tool-gui)
 
 </div>
