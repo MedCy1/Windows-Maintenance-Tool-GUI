@@ -340,6 +340,7 @@
             </div>
             <div class="output-controls">
                 <button class="output-btn clear-btn" id="clearOutput">Effacer</button>
+                <button class="output-btn" id="copyOutput">Copier</button>
                 <button class="output-btn toggle-btn" id="toggleOutput">▼</button>
             </div>
         </div>
@@ -389,6 +390,10 @@
         </div>
     </div>
 
-    <script src="renderer.js"></script>
+    <!-- Scripts dans l'ordre : commands → ui → executor → main -->
+    <script src="commands.js"></script>
+    <script src="ui-functions.js"></script>
+    <script src="command-executor.js"></script>
+    <script src="main-renderer.js"></script>
 </body>
 </html>

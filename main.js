@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain, dialog, shell } = require('electron');
 const path = require('path');
 const { exec, spawn } = require('child_process');
+const iconv = require('iconv-lite');
 const os = require('os');
 
 // Garde une référence globale de l'objet window
@@ -24,8 +25,7 @@ function createWindow() {
         icon: path.join(__dirname, 'assets', 'icon.png')
     });
 
-    // Charger index.html
-    mainWindow.loadFile('index.html');
+    mainWindow.loadFile('src/index.html');
 
     // Afficher quand prêt pour éviter le flash visuel
     mainWindow.once('ready-to-show', () => {
@@ -95,61 +95,175 @@ ipcMain.handle('execute-command', async (event, command, description) => {
     return new Promise((resolve, reject) => {
         console.log(`Exécution: ${description}`);
         console.log(`Commande: ${command}`);
-        
-        const process = exec(command, { 
-            encoding: 'utf8',
-            maxBuffer: 1024 * 1024 * 10 // 10MB buffer
-        });
-        
+
+        let child;
+        if (process.platform === 'win32') {
+            // /U : force UTF-16LE, /C : exécute puis ferme
+            child = spawn('cmd', ['/U', '/C', command], {
+                stdio: ['pipe', 'pipe', 'pipe']
+            });
+        } else {
+            const args = command.split(' ');
+            const cmd = args.shift();
+            child = spawn(cmd, args, {
+                shell: true,
+                stdio: ['pipe', 'pipe', 'pipe']
+            });
+        }
+
         let output = '';
         let error = '';
-        
-        process.stdout.on('data', (data) => {
-            output += data;
-            // Envoyer les données en temps réel
-            event.sender.send('command-output', data.toString());
+        let hasOutput = false;
+
+        child.stdout.on('data', (data) => {
+            const text = process.platform === 'win32'
+                ? data.toString('utf16le')
+                : data.toString('utf8');
+            output += text;
+            hasOutput = true;
+
+            const lines = text.split(/\r?\n/).filter(line => line.trim());
+            lines.forEach(line => event.sender.send('command-output', line.trim()));
         });
-        
-        process.stderr.on('data', (data) => {
-            error += data;
-            event.sender.send('command-error', data.toString());
+
+        // Capturer stderr en temps réel
+        child.stderr.on('data', (data) => {
+            const text = process.platform === 'win32'
+                ? data.toString('utf16le')
+                : data.toString('utf8');
+            error += text;
+            hasOutput = true;
+
+            const lines = text.split(/\r?\n/).filter(line => line.trim());
+            lines.forEach(line => event.sender.send('command-error', line.trim()));
         });
-        
-        process.on('close', (code) => {
-            resolve({
-                success: code === 0,
-                output: output,
-                error: error,
-                code: code
-            });
+
+        // Fin du processus
+        child.on('close', (code) => {
+            setTimeout(() => {
+                resolve({
+                    success: code === 0 || code === null,
+                    output: output.trim(),
+                    error: error.trim(),
+                    code: code,
+                    hasRealTimeOutput: hasOutput
+                });
+            }, 100);
         });
-        
-        process.on('error', (err) => {
+
+        // Erreur du processus
+        child.on('error', (err) => {
+            console.error('Erreur processus:', err);
+            event.sender.send('command-error', `Erreur: ${err.message}`);
             reject(err);
         });
+
+        // Timeout de sécurité (30 minutes)
+        setTimeout(() => {
+            if (!child.killed) {
+                child.kill();
+                event.sender.send('command-error', 'Commande interrompue (timeout)');
+                resolve({
+                    success: false,
+                    output,
+                    error: 'Timeout atteint',
+                    code: -1
+                });
+            }
+        }, 30 * 60 * 1000);
     });
 });
 
-// Handler pour les commandes spéciales qui nécessitent des privilèges
+// Handler pour les commandes admin – utilisation de cmd /U pour sortie UTF-16LE
 ipcMain.handle('execute-admin-command', async (event, command, description) => {
     return new Promise((resolve, reject) => {
         console.log(`Exécution admin: ${description}`);
-        
-        // Utiliser PowerShell avec élévation pour les commandes admin
-        const psCommand = `Start-Process cmd -ArgumentList '/c ${command}' -Verb RunAs -Wait`;
-        
-        exec(`powershell.exe -Command "${psCommand}"`, (error, stdout, stderr) => {
-            if (error) {
-                reject(error);
-                return;
-            }
-            
-            resolve({
-                success: true,
-                output: stdout,
-                error: stderr
-            });
+
+        const tempFile      = path.join(os.tmpdir(), `wmt_output_${Date.now()}.txt`);
+        const tempErrorFile = path.join(os.tmpdir(), `wmt_error_${Date.now()}.txt`);
+
+        const wrappedCmd = `${command} > "${tempFile}" 2> "${tempErrorFile}"`;
+
+        const psCommand = [
+            'Start-Process', 'cmd',
+            '-ArgumentList', `'/U','/C','${ wrappedCmd.replace(/'/g, "''") }'`,
+            '-Verb', 'RunAs',
+            '-Wait',
+            '-WindowStyle', 'Hidden'
+        ].join(' ');
+
+        const proc = spawn('powershell.exe', [
+            '-NoProfile',
+            '-NonInteractive',
+            '-Command',
+            psCommand
+        ], {
+            stdio: ['pipe','pipe','pipe']
         });
+
+        proc.on('error', err => {
+            console.error('Erreur PowerShell:', err);
+            event.sender.send('command-error', `Erreur PowerShell: ${err.message}`);
+            reject(err);
+        });
+
+        proc.on('close', code => {
+            // Lecture des fichiers en UTF-16LE
+            const fs = require('fs');
+            setTimeout(() => {
+                let output = '';
+                let error  = '';
+                let hasRealTimeOutput = false;
+
+                try {
+                    if (fs.existsSync(tempFile)) {
+                        // Le fichier contient du UTF-16LE émis par cmd /U
+                        output = fs.readFileSync(tempFile, 'utf16le');
+                        fs.unlinkSync(tempFile);
+                        if (output.trim()) {
+                            hasRealTimeOutput = true;
+                            output.split(/\r?\n/).forEach(line => {
+                                if (line.trim()) event.sender.send('command-output', line.trim());
+                            });
+                        }
+                    }
+                    if (fs.existsSync(tempErrorFile)) {
+                        error = fs.readFileSync(tempErrorFile, 'utf16le');
+                        fs.unlinkSync(tempErrorFile);
+                        error.split(/\r?\n/).forEach(line => {
+                            if (line.trim()) event.sender.send('command-error', line.trim());
+                        });
+                    }
+                } catch (e) {
+                    console.error('Erreur lecture fichiers temp:', e);
+                    event.sender.send('command-error', `Erreur lecture fichier: ${e.message}`);
+                    error += `\nErreur lecture fichier temporaire: ${e.message}`;
+                }
+
+                resolve({
+                    success: code === 0,
+                    output: output.trim(),
+                    error:  error.trim(),
+                    code,
+                    hasRealTimeOutput
+                });
+            }, 500);
+        });
+
+        // Timeout (45 min)
+        setTimeout(() => {
+            if (!proc.killed) {
+                proc.kill();
+                event.sender.send('command-error', 'Commande interrompue (timeout)');
+                resolve({
+                    success: false,
+                    output: '',
+                    error: 'Timeout atteint',
+                    code: -1,
+                    hasRealTimeOutput: false
+                });
+            }
+        }, 45 * 60 * 1000);
     });
 });
 
